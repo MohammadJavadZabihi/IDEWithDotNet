@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "IDEWithDotNet (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "IDEWithDotNet (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

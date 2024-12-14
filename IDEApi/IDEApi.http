@@ -1,0 +1,6 @@
+@IDEApi_HostAddress = http://localhost:5096
+
+GET {{IDEApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

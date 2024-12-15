@@ -11,17 +11,22 @@
     <Grid Background="#1E201E" >
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <Border x:Name="errorBorder" Background="#FA4032" CornerRadius="10" Width="400" Height="30" Margin="0 0 0 50" Visibility="Collapsed">
+                <TextBlock x:Name="txtBorderError" Text="Error" Margin="15 0 0 0" HorizontalAlignment="Center" FontFamily="Vazir" FontSize="15" VerticalAlignment="Center"/>
+            </Border>
+
             <TextBlock Text="Welcome Back" HorizontalAlignment="Center" FontFamily="Vazir" FontSize="30" Margin="0 0 0 30"/>
 
-            <TextBox PlaceholderText="Email" Width="400" Height="30"/>
+            <TextBox x:Name="txtEmail" PlaceholderText="Email" Width="400" Height="30"/>
 
-            <PasswordBox Margin="0 40 0 0" PlaceholderText="Password"/>
+            <PasswordBox x:Name="txtPassword" Margin="0 40 0 0" PlaceholderText="Password"/>
 
-            <CheckBox Content="Remember Me" Margin="0 20 0 0"/>
+            <CheckBox x:Name="ckbRememberMe" Content="Remember Me" Margin="0 20 0 0"/>
 
             <Button Content="Forgot password" FontFamily="Vazir" Margin="0 20 0 0" Background="Transparent" BorderBrush="Transparent"/>
 
-            <Button HorizontalAlignment="Center" Margin="0 30 0 0" Content="Login" Width="200" Background="#1A3636"/>
+            <Button HorizontalAlignment="Center" Margin="0 30 0 0" Content="Login" Width="200" Background="#1A3636" Click="Button_Click"/>
 
             <Line X1="10" Y1="50" X2="400" Y2="50" Stroke="White" StrokeThickness="2"/>
             

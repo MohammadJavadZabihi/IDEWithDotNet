@@ -10,6 +10,7 @@ namespace IDEWithDotNet.Views
     public sealed partial class RegisterPage : Window
     {
         private CallApi _callApi;
+        //private string _localUrl = ConfigurationManager.AppSettings["LocalApiUrl"];
 
         public RegisterPage()
         {

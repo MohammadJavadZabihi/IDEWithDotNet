@@ -9,15 +9,20 @@ namespace IDECore.Service
     public class UserManagerService : IUserManagerService
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly IEmailSender _emailSender;
+        private readonly IAuthenticateService _authenticateService;
         public UserManagerService(UserManager<IdentityUser> userManager,
             IConfiguration configuration,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            SignInManager<IdentityUser> signInManager, IAuthenticateService authenticateService)
         {
             _userManager = userManager;
             _configuration = configuration;
             _emailSender = emailSender;
+            _signInManager = signInManager;
+            _authenticateService = authenticateService;
         }
 
         public async Task<bool> ConfrimEmail(string userId, string token)
@@ -37,6 +42,28 @@ namespace IDECore.Service
         public Task<string> LoginUser()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<string> LoginUser(LoginUserDTO loginUserDTO)
+        {
+            var user = await _userManager.FindByEmailAsync(loginUserDTO.Email);
+
+            if( user == null)
+            {
+                return null;
+            }
+
+            var resul = await _signInManager.
+                PasswordSignInAsync(user, loginUserDTO.Password, loginUserDTO.RememberMe, false);
+
+            if(resul.Succeeded)
+            {
+                var token = _authenticateService.AuthenticatJwtToken(user.Id, user.UserName, user.Email);
+
+                return token;
+            }
+
+            return null;
         }
 
         public async Task<bool> RegisterUser(UserRegisterDTO userRegisterDTO)

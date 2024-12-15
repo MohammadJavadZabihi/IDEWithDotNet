@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using IDECore.Service.Interface;
 using IDECore.Service;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,32 @@ builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<Use
 
 builder.Services.AddTransient<IUserManagerService, UserManagerService>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddTransient<IAuthenticateService, AuthenticateService>();
+
+#endregion
+
+#region Jwt
+
+var key = Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(oprions =>
+{
+    oprions.RequireHttpsMetadata = false;
+    oprions.SaveToken = true;
+    oprions.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidIssuer = builder.Configuration["Authentication:Issuer"],
+        ValidAudience = builder.Configuration["Authentication:Audience"]
+    };
+});
 
 #endregion
 

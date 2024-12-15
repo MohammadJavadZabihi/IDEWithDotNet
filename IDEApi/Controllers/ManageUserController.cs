@@ -1,6 +1,5 @@
 ﻿using IDECore.DTOs;
 using IDECore.Service.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDEApi.Controllers
@@ -14,6 +13,8 @@ namespace IDEApi.Controllers
         {
             _userManagerService = userManagerService;
         }
+
+        #region Register
 
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterUser(UserRegisterDTO userRegisterDTO)
@@ -29,6 +30,10 @@ namespace IDEApi.Controllers
             return Ok(registerResult);
         }
 
+        #endregion
+
+        #region Confrim Email
+
         [HttpPost("ConfrimEmail/{userId}/{token}")]
         public async Task<IActionResult> ConfrimEmial(string userId, string token)
         {
@@ -42,5 +47,25 @@ namespace IDEApi.Controllers
 
             return Ok();
         }
+
+        #endregion
+
+        #region Login
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginUserDTO loginUserDTO)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userManagerService.LoginUser(loginUserDTO);
+
+            if(result != null)
+                return Ok(result);
+
+            return BadRequest();
+        }
+
+        #endregion
     }
 }

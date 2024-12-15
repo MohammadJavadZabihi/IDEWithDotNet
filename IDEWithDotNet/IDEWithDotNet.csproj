@@ -13,6 +13,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Views\MainText.xaml" />
     <None Remove="Views\RegisterPage.xaml" />
   </ItemGroup>
 
@@ -40,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ApiRequest.Net" Version="1.1.0" />
+    <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -52,6 +54,14 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IDECore\IDECore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\MainText.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\RegisterPage.xaml">

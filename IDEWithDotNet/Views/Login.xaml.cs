@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml;
 using ApiRequest.Net.CallApi;
+using IDECore.DTOs;
 using IDEWithDotNet.Views;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -69,11 +70,13 @@ namespace IDEWithDotNet
                     RememberMe = remmebm
                 };
 
-                var responseMessage = await _callApi.SendPostRequest<string>("https://localhost:7049/api/Users/Login", data);
+                var responseMessage = await _callApi.SendPostRequest<LoginReturn>("https://localhost:7049/api/Users/Login", data);
 
                 if (responseMessage.IsSuccess)
                 {
-
+                    MainText mainText = new MainText();
+                    mainText.Activate();
+                    this.Close();
                 }
                 else
                 {

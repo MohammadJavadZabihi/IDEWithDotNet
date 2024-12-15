@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="IDEWithDotNet.Views.MainText"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:IDEWithDotNet.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="MainText">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- فایل اکسپلورر -->
+        <StackPanel Background="#2D2D30" Grid.Column="0">
+            <TextBlock Text="File Explorer" FontSize="20" Foreground="White" Padding="10" />
+            <TreeView x:Name="FileTreeView" Background="#2D2D30" BorderThickness="0" Foreground="White">
+            </TreeView>
+        </StackPanel>
+
+        <!-- بخش ادیتور -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="150" />
+            </Grid.RowDefinitions>
+
+            <!-- دکمه‌ها -->
+            <StackPanel Orientation="Horizontal" Background="#2D2D30">
+                <Button x:Name="RunProject" Background="#118B50" Content="Run Project" 
+                        Foreground="White" 
+                        Margin="10" 
+                        FontFamily="Vazir" Click="RunProject_Click"/>
+
+                <Button x:Name="ClearOutput" Background="#FF2929" Content="Clear Output" 
+                        Foreground="White" 
+                        Margin="10" 
+                        FontFamily="Vazir" Click="ClearOutput_Click"/>
+            </StackPanel>
+
+            <!-- TextBox برای کد -->
+            <TextBox x:Name="CodeEditor"
+                     Grid.Row="1"
+                     AcceptsReturn="True"
+                     FontFamily="Consolas"
+                     FontSize="14"
+                     Background="#1E1E1E"
+                     Foreground="White"
+                     BorderThickness="0"
+                     Padding="10"
+                     TextWrapping="Wrap" />
+
+            <!-- TextBox برای خروجی -->
+            <TextBox x:Name="OutputConsole"
+                     Grid.Row="2"
+                     AcceptsReturn="True"
+                     FontFamily="Consolas"
+                     FontSize="14"
+                     Background="#2D2D30"
+                     Foreground="White"
+                     BorderThickness="0"
+                     Padding="10"
+                     TextWrapping="Wrap"
+                     IsReadOnly="True" />
+        </Grid>
+    </Grid>
+</Window>

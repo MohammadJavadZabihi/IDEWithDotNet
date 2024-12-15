@@ -1,6 +1,7 @@
 ﻿using IDECore.DTOs;
 using IDECore.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace IDEApi.Controllers
 {
@@ -61,7 +62,11 @@ namespace IDEApi.Controllers
             var result = await _userManagerService.LoginUser(loginUserDTO);
 
             if(result != null)
-                return Ok(result);
+                return Ok(new
+                {
+                    Token = result,
+                    Statuce = true,
+                });
 
             return BadRequest();
         }

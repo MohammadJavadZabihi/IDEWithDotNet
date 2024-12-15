@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="IDEWithDotNet">
-    <Grid Background="#1E201E">
+    <Grid Background="#1E201E" >
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Welcome Back" HorizontalAlignment="Center" FontFamily="Vazir" FontSize="30" Margin="0 0 0 30"/>
@@ -19,7 +19,13 @@
 
             <CheckBox Content="Remember Me" Margin="0 20 0 0"/>
 
+            <Button Content="Forgot password" FontFamily="Vazir" Margin="0 20 0 0" Background="Transparent" BorderBrush="Transparent"/>
+
             <Button HorizontalAlignment="Center" Margin="0 30 0 0" Content="Login" Width="200" Background="#1A3636"/>
+
+            <Line X1="10" Y1="50" X2="400" Y2="50" Stroke="White" StrokeThickness="2"/>
+            
+            <Button x:Name="goToRegisterPage" Click="goToRegisterPage_Click" HorizontalAlignment="Center" Margin="0 30 0 0" Content="Create Account" Width="200" Background="#1A3636"/>
         </StackPanel>
 
     </Grid>

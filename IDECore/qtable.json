@@ -1,0 +1,16 @@
+{
+  "SyntaxErrors": {
+    "fo": { "for": 5 },
+    "prit": { "print": 2 },
+    "whil": { "while": 2 },
+    "ifif": { "if condishen": 10 },
+    "de": { "def fun_name": 10 },
+    "prh": { "print('hellp world')": 10 },
+    "forra": { "for x in range ():": 10 },
+    "forra2": { "for x in range (2):": 10 }
+  },
+  "MissingSymbols": {
+    "(": { ")": 1 },
+    "[": { "]": 3 }
+  }
+}

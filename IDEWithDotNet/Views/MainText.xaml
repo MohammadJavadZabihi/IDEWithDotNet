@@ -41,6 +41,11 @@
                         Foreground="White" 
                         Margin="10" 
                         FontFamily="Vazir" Click="ClearOutput_Click"/>
+                
+                <Button x:Name="FixCode" Background="Blue" Content="fix" 
+                        Foreground="White" 
+                        Margin="10" 
+                        FontFamily="Vazir" Click="FixCode_Click"/>
             </StackPanel>
 
             <!-- TextBox برای کد -->

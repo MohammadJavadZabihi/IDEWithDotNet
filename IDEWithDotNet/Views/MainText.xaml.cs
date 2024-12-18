@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using IDECore.Service;
+using Microsoft.UI.Xaml;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -64,6 +65,17 @@ namespace IDEWithDotNet.Views
         private void ClearOutput_Click(object sender, RoutedEventArgs e)
         {
             OutputConsole.Text = "";
+        }
+
+        private void FixCode_Click(object sender, RoutedEventArgs e)
+        {
+            CodeFixer codeFixer = new CodeFixer();
+            var codFix = codeFixer.FixCode(CodeEditor.Text);
+
+            if(codFix != CodeEditor.Text)
+            {
+                CodeEditor.Text = codFix;
+            }
         }
     }
 }

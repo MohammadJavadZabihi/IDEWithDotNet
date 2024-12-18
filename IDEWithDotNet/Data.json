@@ -1,0 +1,38 @@
+{
+  "syntax_errors": {
+    "typo_errors": {
+      "fo": "for",
+      "prit": "print",
+      "whle": "while",
+      "whi" : "while",
+      "ran": "range"
+    },
+    "structural_errors": {
+      "forrange": "for x in range ():",
+      "ifif": "if condition:",
+      "de": "def func_name():"
+    },
+    "snippet_errors": {
+      "arr": "arr_data = ['data1', 'data2', 'data3']",
+      "arrnum": "arr_num = [1, 2, 3, 4]"
+    }
+  },
+  "missing_symbols": {
+    "(": ")",
+    ")": "(",
+    "[": "]",
+    "{": "}"
+  },
+  "indentation_errors": {
+    "missing_indent": "Add 4 spaces",
+    "extra_indent": "Remove 4 spaces"
+  },
+  "errors": [
+    {
+
+    },
+    {
+
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "SyntaxErrors": {
+    "fo": { "for x in ringـinterval:": 5 },
+    "prit": { "print('your_text')": 5 },
+    "prt": { "print('your_text')": 5 },
+    "whle": { "while i < condotion:": 5 },
+    "whi": { "while i < condotion:": 5 },
+    "forrange": { "for x in range (): ": 5 },
+    "ifif": { "if condition:": 5 },
+    "de": { "def func_name():": 5 },
+    "arr": { "arr_data = ['data1', 'data2', 'data3']": 5 },
+    "arr5": { "arr_data = ['data1', 'data2', 'data3', 'data4','data5']": 5 },
+    "arrnum": { "arr_data = [1, 2, 3, 4]": 5 },
+    "arrnum6": { "arr_num = [1, 2, 3, 4, 5, 6]" : 5}
+  },
+  "MissingSymbols": {
+    "()": { "()": 0 },
+    "{}": { "{}": 0 },
+    "[]": { "[]": 0 },
+    "(": { ")": 2 },
+    ")": { "(": 2 },
+    "[": { "]": 2 },
+    "]": { "[": 2 },
+    "{": { "}": 2 },
+    "}": { "{": 2 }
+  }
+}

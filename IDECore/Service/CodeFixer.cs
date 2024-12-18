@@ -6,7 +6,7 @@ namespace IDECore.Service
     public class CodeFixer
     {
         private readonly JsonHandler _jsonHandler = new JsonHandler();
-        private readonly QLearningStorage _qLearningStorage = new QLearningStorage();
+        private readonly QLearningStorage qLearningStorage = new QLearningStorage();
         public Dictionary<string, Dictionary<string, double>> FixCodReturn { get; private set; } = new Dictionary<string, Dictionary<string, double>>();
 
         #region Fix Code Method
@@ -81,7 +81,6 @@ namespace IDECore.Service
 
                 updateLines.Add(updateLine);
 
-                //UpdateQWithFeedBack(true);
             }
             inputeCode = string.Join("\n", updateLines);
             return inputeCode;
@@ -94,7 +93,8 @@ namespace IDECore.Service
 
         public void UpdateQWithFeedBack(bool isGood)
         {
-            var data = _jsonHandler.LoadData();
+            double alpha = 0.1;
+            double gamma = 0.9;
 
             if (isGood)
             {
@@ -106,36 +106,35 @@ namespace IDECore.Service
                         string action = item.Key;
                         double reward = item.Value;
 
-                        if(!data.MissingSymbols.ContainsKey(state))
-                        {
-                            data.MissingSymbols[state] = new Dictionary<string, double>();
-                        }
+                        double currentQ = qLearningStorage.GetQValue(state, action);
 
-                        if(!data.MissingSymbols[state].ContainsKey(action))
-                        {
-                            data.MissingSymbols[state][action] = 0;
-                        }
+                        double maxNextQ = 0;
 
-                        data.MissingSymbols[state][action] += reward;
+                        double newQ = currentQ + alpha * (reward + gamma * maxNextQ - currentQ);
+
+                        qLearningStorage.UpdateQValue(state, action, newQ);
                     }
                 }
             }
             else
             {
-                foreach(var dataFix in FixCodReturn)
+                foreach (var dataFix in FixCodReturn)
                 {
-                    foreach(var item in dataFix.Value)
+                    foreach (var item in dataFix.Value)
                     {
                         string state = dataFix.Key;
                         string action = item.Key;
 
-                        data.MissingSymbols[state][action] = -1;
+                        double currentQ = qLearningStorage.GetQValue(state, action);
+                        double penalty = -1;
+                        double newQ = currentQ + alpha * (penalty - currentQ);
+
+                        qLearningStorage.UpdateQValue(state, action, newQ);
                     }
                 }
             }
+            qLearningStorage.SaveQTable();
         }
-
-
         #endregion
     }
 }

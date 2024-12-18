@@ -1,16 +1,12 @@
 {
-  "SyntaxErrors": {
-    "fo": { "for": 5 },
-    "prit": { "print": 2 },
-    "whil": { "while": 2 },
-    "ifif": { "if condishen": 10 },
-    "de": { "def fun_name": 10 },
-    "prh": { "print('hellp world')": 10 },
-    "forra": { "for x in range ():": 10 },
-    "forra2": { "for x in range (2):": 10 }
+  "fo": {
+    "for x in ringinterval:": 0.5,
+    "for x in ring\u0640interval:": 0.95
   },
-  "MissingSymbols": {
-    "(": { ")": 1 },
-    "[": { "]": 3 }
+  "de": {
+    "def func_name():": 0.5
+  },
+  "prt": {
+    "print(\u0027your_text\u0027)": 0.5
   }
 }

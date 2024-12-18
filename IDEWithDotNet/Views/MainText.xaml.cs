@@ -8,6 +8,8 @@ namespace IDEWithDotNet.Views
 {
     public sealed partial class MainText : Window
     {
+        public CodeFixer codeFixer = new CodeFixer();
+
         public MainText()
         {
             this.InitializeComponent();
@@ -69,13 +71,36 @@ namespace IDEWithDotNet.Views
 
         private void FixCode_Click(object sender, RoutedEventArgs e)
         {
-            CodeFixer codeFixer = new CodeFixer();
+            string beforeChange = CodeEditor.Text;
+
             var codFix = codeFixer.FixCode(CodeEditor.Text);
 
             if(codFix != CodeEditor.Text)
             {
                 CodeEditor.Text = codFix;
+                btnYes.Visibility = Visibility.Visible;
+                btnNo.Visibility = Visibility.Visible;
+
+                txtEnjoye.Text = "Are you Enjoy From This Cganes?";
             }
+        }
+
+        private void btnYes_Click(object sender, RoutedEventArgs e)
+        {
+            codeFixer.UpdateQWithFeedBack(true);
+
+            txtEnjoye.Text = "";
+            btnYes.Visibility = Visibility.Collapsed;
+            btnNo.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnNo_Click(object sender, RoutedEventArgs e)
+        {
+            codeFixer.UpdateQWithFeedBack(false);
+
+            txtEnjoye.Text = "";
+            btnYes.Visibility = Visibility.Collapsed;
+            btnNo.Visibility = Visibility.Collapsed;
         }
     }
 }

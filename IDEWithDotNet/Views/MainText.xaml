@@ -18,6 +18,19 @@
         <!-- فایل اکسپلورر -->
         <StackPanel Background="#2D2D30" Grid.Column="0">
             <TextBlock Text="File Explorer" FontSize="20" Foreground="White" Padding="10" />
+            <TextBlock x:Name="txtEnjoye" FontSize="20" Foreground="White" Padding="10" />
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnYes" Background="#118B50" Content="Yes" 
+                Foreground="White" 
+                Margin="10" 
+                FontFamily="Vazir" Click="btnYes_Click" Visibility="Collapsed"/>
+
+                <Button x:Name="btnNo" Background="#FF2929" Content="No" 
+                Foreground="White" 
+                Margin="10" 
+                FontFamily="Vazir" Click="btnNo_Click" Visibility="Collapsed"/>
+                
+            </StackPanel>
             <TreeView x:Name="FileTreeView" Background="#2D2D30" BorderThickness="0" Foreground="White">
             </TreeView>
         </StackPanel>
@@ -41,7 +54,7 @@
                         Foreground="White" 
                         Margin="10" 
                         FontFamily="Vazir" Click="ClearOutput_Click"/>
-                
+
                 <Button x:Name="FixCode" Background="Blue" Content="fix" 
                         Foreground="White" 
                         Margin="10" 

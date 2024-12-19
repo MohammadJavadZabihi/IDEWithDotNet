@@ -5,7 +5,7 @@ namespace IDECore.Service
 {
     public class JsonHandler
     {
-        private const string filePath = "C:\\Users\\mahan\\source\\repos\\IDEWithDotNet\\IDECore\\Data.json";
+        private string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AllData", "Data.json");
 
         public DataSet LoadData()
         {

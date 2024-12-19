@@ -4,7 +4,7 @@ namespace IDECore.Service
 {
     public class QLearningStorage
     {
-        private const string FilePath = "C:\\Users\\mahan\\source\\repos\\IDEWithDotNet\\IDECore\\qtable.json";
+        private string FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AllData", "qtable.json");
 
         public Dictionary<string, Dictionary<string, double>> QTable { get; set; }
 

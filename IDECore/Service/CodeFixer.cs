@@ -15,76 +15,102 @@ namespace IDECore.Service
         {
             var data = _jsonHandler.LoadData();
 
-            var lines = inputeCode.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+            var lines = inputeCode.Split(new[] { "\r\n", "\r", "\n", "\\" }, StringSplitOptions.None);
             var updateLines = new List<string>();
             var misingSymbolsHashSet = new HashSet<string>(data.MissingSymbols.Keys);
             var syntaxtErrorHashSet = new HashSet<string>(data.SyntaxErrors.Keys);
 
+            #region mainCod(Old)
+
+            //foreach (var line in lines)
+            //{
+            //    string updateLine = line;
+
+            //    foreach (var key in misingSymbolsHashSet)
+            //    {
+            //        if (updateLine.Contains(key))
+            //        {
+            //            var misiSymbolValue = data.MissingSymbols[key];
+
+            //            if (key == "(" || key == "[" || key == "{")
+            //            {
+
+            //                updateLine = updateLine.Replace(key, key + misiSymbolValue.First().Key);
+            //            }
+            //            else
+            //            {
+            //                updateLine = updateLine.Replace(key, misiSymbolValue.First().Key + key);
+            //            }
+
+            //            if (!FixCodReturn.ContainsKey(key))
+            //            {
+            //                FixCodReturn[key] = new Dictionary<string, double>();
+            //            }
+
+            //            var valuKey = misiSymbolValue.First().Key;
+            //            var valueValue = misiSymbolValue.First().Value;
+
+            //            if (!FixCodReturn[key].ContainsKey(valuKey))
+            //            {
+            //                FixCodReturn[key].Add(valuKey, valueValue);
+            //            }
+            //        }
+            //    }
+
+            //    foreach (var error in syntaxtErrorHashSet)
+            //    {
+            //        if (updateLine.Contains(error))
+            //        {
+            //            var errorSyntaxt = data.SyntaxErrors[error];
+
+            //            updateLine = updateLine.Replace(error, errorSyntaxt.First().Key);
+
+            //            if (!FixCodReturn.ContainsKey(error))
+            //            {
+            //                FixCodReturn[error] = new Dictionary<string, double>();
+
+            //                var valueKey = errorSyntaxt.First().Key;
+            //                var valueValu = errorSyntaxt.First().Value;
+
+            //                if (!FixCodReturn[error].ContainsKey(valueKey))
+            //                {
+            //                    FixCodReturn[error].Add(valueKey, valueValu);
+            //                }
+            //            }
+            //        }
+
+            //    }
+
+            //    updateLines.Add(updateLine);
+            //    qLearningStorage.ChoseFixCode("de");
+            //}
+
+            #endregion
+
             foreach (var line in lines)
             {
-                string updateLine = line;
+                var bestAction = qLearningStorage.ChoseFixCode(line);
 
-                foreach (var key in misingSymbolsHashSet)
+                if (bestAction.Any())
                 {
-                    if (updateLine.Contains(key))
+
+                    if(!FixCodReturn.ContainsKey(line))
                     {
-                        var misiSymbolValue = data.MissingSymbols[key];
-
-                        if (key == "(" || key == "[" || key == "{")
-                        {
-
-                            updateLine = updateLine.Replace(key, key + misiSymbolValue.First().Key);
-                        }
-                        else
-                        {
-                            updateLine = updateLine.Replace(key, misiSymbolValue.First().Key + key);
-                        }
-
-                        if (!FixCodReturn.ContainsKey(key))
-                        {
-                            FixCodReturn[key] = new Dictionary<string, double>();
-                        }
-
-                        var valuKey = misiSymbolValue.First().Key;
-                        var valueValue = misiSymbolValue.First().Value;
-
-                        if (!FixCodReturn[key].ContainsKey(valuKey))
-                        {
-                            FixCodReturn[key].Add(valuKey, valueValue);
-                        }
-                    }
-                }
-
-                foreach (var error in syntaxtErrorHashSet)
-                {
-                    if (updateLine.Contains(error))
-                    {
-                        var errorSyntaxt = data.SyntaxErrors[error];
-
-                        updateLine = updateLine.Replace(error, errorSyntaxt.First().Key);
-
-                        if (!FixCodReturn.ContainsKey(error))
-                        {
-                            FixCodReturn[error] = new Dictionary<string, double>();
-
-                            var valueKey = errorSyntaxt.First().Key;
-                            var valueValu = errorSyntaxt.First().Value;
-
-                            if (!FixCodReturn[error].ContainsKey(valueKey))
-                            {
-                                FixCodReturn[error].Add(valueKey, valueValu);
-                            }
-                        }
+                        FixCodReturn[line] = new Dictionary<string, double>();
                     }
 
+                    var valueKey = bestAction.First().Key;
+                    var value = bestAction.First().Value;
+
+                    if (!FixCodReturn[line].ContainsKey(valueKey))
+                    {
+                        FixCodReturn[line].Add(valueKey, value);
+                    }
+
+                    inputeCode = inputeCode.Replace(line, valueKey);
                 }
-
-                updateLines.Add(updateLine);
-
             }
-            inputeCode = string.Join("\n", updateLines);
             return inputeCode;
-
         }
 
         #endregion
@@ -109,6 +135,10 @@ namespace IDECore.Service
                         double currentQ = qLearningStorage.GetQValue(state, action);
 
                         double maxNextQ = 0;
+                        if (qLearningStorage.QTable.ContainsKey(state)) 
+                        {
+                            maxNextQ = qLearningStorage.QTable[state].Values.Max();
+                        }
 
                         double newQ = currentQ + alpha * (reward + gamma * maxNextQ - currentQ);
 
@@ -133,8 +163,10 @@ namespace IDECore.Service
                     }
                 }
             }
+
             qLearningStorage.SaveQTable();
         }
+
         #endregion
     }
 }

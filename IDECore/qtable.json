@@ -1,12 +1,19 @@
 {
   "fo": {
     "for x in ringinterval:": 0.5,
-    "for x in ring\u0640interval:": 0.95
+    "for x in ring\u0640interval:": 1.0354999999999999
   },
   "de": {
-    "def func_name():": 0.5
+    "def func_name():": 0.5,
+    "def func_name(): your_fuction": 0.654
   },
   "prt": {
     "print(\u0027your_text\u0027)": 0.5
+  },
+  "ifif": {
+    "if condition:": 1.5778295000000002
+  },
+  "arr": {
+    "arr_data = [\u0027data1\u0027, \u0027data2\u0027, \u0027data3\u0027]": 1.1195
   }
 }

@@ -65,5 +65,20 @@ namespace IDECore.Service
             }
             return 0;
         }
+
+        public Dictionary<string, double> ChoseFixCode(string state)
+        {
+            if (QTable.ContainsKey(state))
+            {
+                var bestAction = QTable[state].OrderByDescending(item => item.Value).FirstOrDefault();
+
+                return new Dictionary<string, double>
+                {
+                    {bestAction.Key, bestAction.Value },
+                };
+            }
+
+            return null;
+        }
     }
 }

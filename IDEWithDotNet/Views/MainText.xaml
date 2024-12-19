@@ -15,7 +15,6 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- فایل اکسپلورر -->
         <StackPanel Background="#2D2D30" Grid.Column="0">
             <TextBlock Text="File Explorer" FontSize="20" Foreground="White" Padding="10" />
             <TextBlock x:Name="txtEnjoye" FontSize="20" Foreground="White" Padding="10" />
@@ -35,7 +34,6 @@
             </TreeView>
         </StackPanel>
 
-        <!-- بخش ادیتور -->
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
@@ -43,7 +41,6 @@
                 <RowDefinition Height="150" />
             </Grid.RowDefinitions>
 
-            <!-- دکمه‌ها -->
             <StackPanel Orientation="Horizontal" Background="#2D2D30">
                 <Button x:Name="RunProject" Background="#118B50" Content="Run Project" 
                         Foreground="White" 
@@ -61,7 +58,6 @@
                         FontFamily="Vazir" Click="FixCode_Click"/>
             </StackPanel>
 
-            <!-- TextBox برای کد -->
             <TextBox x:Name="CodeEditor"
                      Grid.Row="1"
                      AcceptsReturn="True"
@@ -73,7 +69,6 @@
                      Padding="10"
                      TextWrapping="Wrap" />
 
-            <!-- TextBox برای خروجی -->
             <TextBox x:Name="OutputConsole"
                      Grid.Row="2"
                      AcceptsReturn="True"
